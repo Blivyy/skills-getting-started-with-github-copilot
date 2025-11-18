@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>My Belbin Team Role Profile</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #020617;
+      --accent: #38bdf8;
+      --accent-soft: #1e293b;
+      --text-main: #e5e7eb;
+      --text-muted: #9ca3af;
+      --border-subtle: #1f2933;
+      --font-sans: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: var(--font-sans);
+      background: radial-gradient(circle at top, #1f2937 0, #020617 55%);
+      color: var(--text-main);
+      min-height: 100vh;
+    }
+
+    .page {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 3rem;
+    }
+
+    @media (min-width: 768px) {
+      .page {
+        padding: 3rem 1.5rem 4rem;
+      }
+    }
+
+    .card {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.98));
+      border-radius: 1.5rem;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      box-shadow:
+        0 24px 60px rgba(15, 23, 42, 0.9),
+        0 0 0 1px rgba(15, 23, 42, 0.8);
+      padding: 1.75rem 1.5rem 2rem;
+      backdrop-filter: blur(18px);
+    }
+
+    @media (min-width: 768px) {
+      .card {
+        padding: 2.25rem 2rem 2.5rem;
+      }
+    }
+
+    .card-header {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 1.75rem;
+    }
+
+    @media (min-width: 768px) {
+      .card-header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+      }
+    }
+
+    .title-block h1 {
+      font-size: clamp(1.6rem, 2.4vw + 1rem, 2.2rem);
+      margin: 0 0 0.35rem;
+      letter-spacing: 0.03em;
+    }
+
+    .title-block p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      max-width: 36rem;
+    }
+
+    .meta {
+      text-align: left;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+
+    @media (min-width: 768px) {
+      .meta {
+        text-align: right;
+      }
+    }
+
+    .meta div {
+      margin-bottom: 0.15rem;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.2rem 0.65rem;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: #bae6fd;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+    }
+
+    .pill-dot {
+      width: 0.35rem;
+      height: 0.35rem;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 1.75rem;
+    }
+
+    @media (max-width: 799px) {
+      .layout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    .section-title {
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      color: var(--text-muted);
+      margin-bottom: 0.75rem;
+    }
+
+    .lead {
+      font-size: 0.95rem;
+      color: var(--text-main);
+      line-height: 1.6;
+      margin-bottom: 1.25rem;
+    }
+
+    .lead span.highlight {
+      color: #7dd3fc;
+      font-weight: 500;
+    }
+
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .tag {
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      padding: 0.15rem 0.6rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      background: rgba(15, 23, 42, 0.8);
+    }
+
+    .tag strong {
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+
+    .bars {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+      margin-top: 0.5rem;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 4.5rem minmax(0, 1fr) 2.2rem;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .bar-label {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+    }
+
+    .bar-label span.code {
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .bar-label span.name {
+      font-size: 0.75rem;
+    }
+
+    .bar-track {
+      position: relative;
+      width: 100%;
+      height: 0.4rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.95);
+      overflow: hidden;
+      border: 1px solid rgba(30, 64, 175, 0.4);
+    }
+
+    .bar-fill {
+      position: absolute;
+      inset: 0;
+      width: 0;
+      background: linear-gradient(90deg, var(--accent), #a855f7);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.5);
+      transform-origin: left;
+      transition: width 1s ease-out;
+    }
+
+    .bar-score {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .chip {
+      font-size: 0.78rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      color: var(--text-muted);
+    }
+
+    .chip strong {
+      color: #e5e7eb;
+      font-weight: 500;
+    }
+
+    .subsection {
+      background: radial-gradient(circle at top left, #0b1120, #020617);
+      border-radius: 1.1rem;
+      border: 1px solid rgba(30, 64, 175, 0.45);
+      padding: 1rem 1rem 1.1rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .subsection h3 {
+      margin: 0 0 0.4rem;
+      font-size: 0.95rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #a5b4fc;
+      margin-bottom: 0.2rem;
+    }
+
+    .badge-dot {
+      width: 0.3rem;
+      height: 0.3rem;
+      border-radius: 999px;
+      background: #4f46e5;
+    }
+
+    .subsection p {
+      margin: 0;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .footer-note {
+      margin-top: 1.8rem;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      border-top: 1px dashed rgba(148, 163, 184, 0.35);
+      padding-top: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="card">
+      <header class="card-header">
+        <div class="title-block">
+          <div class="pill">
+            <span class="pill-dot"></span>
+            <span>Belbin Team Role Profile</span>
+          </div>
+          <h1>My Belbin Team Roles</h1>
+          <p>
+            A snapshot of how I naturally tend to contribute in a team context,
+            based on the Belbin Team Roles framework. This isn’t a fixed label,
+            but a way of understanding strengths, potential blind spots and how
+            I work best with others.
+          </p>
+        </div>
+        <div class="meta">
+          <div><strong>Top roles:</strong> Resource Investigator, Monitor Evaluator</div>
+          <div><strong>Secondary strengths:</strong> Plant, Implementer, Specialist</div>
+        </div>
+      </header>
+
+      <section class="layout">
+        <!-- LEFT: Narrative + key points -->
+        <article>
+          <h2 class="section-title">Headline summary</h2>
+          <p class="lead">
+            This profile suggests I’m strongest as a
+            <span class="highlight">Resource Investigator</span> and
+            <span class="highlight">Monitor Evaluator</span>, with strong
+            <span class="highlight">Plant</span>,
+            <span class="highlight">Implementer</span> and
+            <span class="highlight">Specialist</span> tendencies.
+            In plain terms: I like exploring ideas and connections, I think
+            things through carefully, and I enjoy turning good ideas into
+            practical systems or solutions.
+          </p>
+
+          <div class="tag-row">
+            <div class="tag"><strong>RE – Resource Investigator</strong> · explorer of ideas & contacts</div>
+            <div class="tag"><strong>ME – Monitor Evaluator</strong> · analytical, evaluates options</div>
+            <div class="tag"><strong>PL – Plant</strong> · creative problem-solver</div>
+            <div class="tag"><strong>IMP – Implementer</strong> · turns plans into action</div>
+            <div class="tag"><strong>SP – Specialist</strong> · deep expertise in chosen areas</div>
+          </div>
+
+          <h2 class="section-title">How I tend to add value</h2>
+          <div class="subsection">
+            <div class="badge"><span class="badge-dot"></span><span>Strengths in a team</span></div>
+            <h3>Explorer, analyst and builder</h3>
+            <p>
+              I’m likely to contribute by spotting opportunities, making
+              connections across people, tools and ideas, and by questioning
+              assumptions so the team makes better decisions. I enjoy
+              problem-solving, improving processes and building practical
+              solutions, especially in areas where I’ve built up specialist
+              knowledge.
+            </p>
+          </div>
+
+          <div class="subsection">
+            <div class="badge"><span class="badge-dot"></span><span>Watch-outs</span></div>
+            <h3>Where I may need support</h3>
+            <p>
+              I’m less naturally drawn to highly forceful “driving” behaviour
+              (Shaper) or very fine-grained perfectionism (Completer Finisher).
+              I can step into these when needed, but I’m usually at my best
+              when paired with people who enjoy pushing deadlines hard and
+              polishing outputs to the final detail, while I focus on ideas,
+              analysis and implementation.
+            </p>
+          </div>
+
+          <div class="subsection">
+            <div class="badge"><span class="badge-dot"></span><span>Working with me</span></div>
+            <h3>How others can get the best from me</h3>
+            <p>
+              I tend to do my best work when I’m involved early in designing
+              processes, systems or decisions; when there’s space to explore
+              options and think through implications; and when I can help turn
+              agreed ideas into something concrete. Clear goals, honest
+              discussion and a bit of room for problem-solving usually bring out
+              my strengths.
+            </p>
+          </div>
+        </article>
+
+        <!-- RIGHT: Scores & basics -->
+        <aside>
+          <h2 class="section-title">Scores by Belbin role</h2>
+          <div class="bars">
+            <!-- max score in this profile = 11 -->
+            <div class="bar-row" data-score="5" data-percent="45">
+              <div class="bar-label">
+                <span class="code">CO</span>
+                <span class="name">Co-ordinator</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill"></div>
+              </div>
+              <div class="bar-score">5</div>
+            </div>
+
+            <div class="bar-row" data-score="4" data-percent="36">
+              <div class="bar-label">
+                <span class="code">SH</span>
+                <span class="name">Shaper</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill"></div>
+              </div>
+              <div class="bar-score">4</div>
+            </div>
+
+            <div class="bar-row" data-score="10" data-percent="91">
+              <div class="bar-label">
+                <span class="code">PL</span>
+                <span class="name">Plant</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill"></div>
+              </div>
+              <div class="bar-score">10</div>
+            </div>
+
+            <div class="bar-row" data-score="11" data-percent="100">
+              <div class="bar-label">
+                <span class="code">ME</span>
+                <span class="name">Monitor Evaluator</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill"></div>
+              </div>
+              <div class="bar-score">11</div>
+            </div>
+
+            <div class="bar-row" data-score="9" data-percent="82">
+              <div class="bar-label">
+                <span class="code">IMP</span>
+                <span class="name">Implementer</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill"></div>
+              </div>
+              <div class="bar-score">9</div>
+            </div>
+
+            <div class="bar-row" data-score="6" data-percent="55">
+              <div class="bar-label">
+                <span class="code">TW</span>
+                <span class="name">Team Worker</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill"></div>
+              </div>
+              <div class="bar-score">6</div>
+            </div>
+
+            <div class="bar-row" data-score="11" data-percent="100">
+              <div class="bar-label">
+                <span class="code">RE</span>
+                <span class="name">Resource Investigator</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill"></div>
+              </div>
+              <div class="bar-score">11</div>
+            </div>
+
+            <div class="bar-row" data-score="5" data-percent="45">
+              <div class="bar-label">
+                <span class="code">CF</span>
+                <span class="name">Completer Finisher</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill"></div>
+              </div>
+              <div class="bar-score">5</div>
+            </div>
+
+            <div class="bar-row" data-score="9" data-percent="82">
+              <div class="bar-label">
+                <span class="code">SP</span>
+                <span class="name">Specialist</span>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill"></div>
+              </div>
+              <div class="bar-score">9</div>
+            </div>
+          </div>
+
+          <h2 class="section-title" style="margin-top:1.8rem;">Belbin role key</h2>
+          <div class="chip-row">
+            <div class="chip"><strong>CO</strong> · Co-ordinator</div>
+            <div class="chip"><strong>SH</strong> · Shaper</div>
+            <div class="chip"><strong>PL</strong> · Plant</div>
+            <div class="chip"><strong>ME</strong> · Monitor Evaluator</div>
+            <div class="chip"><strong>IMP</strong> · Implementer</div>
+            <div class="chip"><strong>TW</strong> · Team Worker</div>
+            <div class="chip"><strong>RE</strong> · Resource Investigator</div>
+            <div class="chip"><strong>CF</strong> · Completer Finisher</div>
+            <div class="chip"><strong>SP</strong> · Specialist</div>
+          </div>
+        </aside>
+      </section>
+
+      <p class="footer-note">
+        This profile is a snapshot based on one Belbin self-perception
+        questionnaire. It reflects how I currently experience and express myself
+        in team settings; it’s not a fixed label or a complete description of
+        my personality.
+      </p>
+    </section>
+  </main>
+
+  <script>
+    // Animate bar widths on load
+    document.addEventListener("DOMContentLoaded", function () {
+      var rows = document.querySelectorAll(".bar-row");
+      rows.forEach(function (row) {
+        var percent = row.getAttribute("data-percent");
+        var fill = row.querySelector(".bar-fill");
+        if (fill && percent) {
+          requestAnimationFrame(function () {
+            fill.style.width = percent + "%";
+          });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
